@@ -1,0 +1,185 @@
+<html><!-- InstanceBegin template="/Templates/template_user_sidenav.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" --><title></title><!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" --><!-- InstanceEndEditable -->
+
+    
+</head>
+<body>
+        {% include"/_System/Includes/head.inc" %} {% include"/_System/Includes/nav.inc" %}
+        
+<div class="container mt-5">
+        <div class="row">
+            <div class="col-sm-4 sidenav">
+                {% include"/_System/Includes/user_sidenav.inc" %}
+            </div>
+            <div class="col-sm-8">
+                <!-- InstanceBeginEditable name="ContentArea" --><h2>Ask a Question!</h2>
+<p>
+    Anim pariatur cliche reprehenderit, enim eiusmod. Anim pariatur cliche reprehenderit, enim eiusmod.Anim pariatur cliche reprehenderit, enim eiusmod.Anim pariatur cliche reprehenderit, enim eiusmod.
+</p>
+<div>
+    <div id="submissionForm">
+        <form name="catcustomcontentform71190" onsubmit="return checkWholeForm71190(this)" enctype="multipart/form-data" method="post" action="/CustomContentProcess.aspx?CCID=26435&OID={module_oid}&OTYPE={module_otype}">
+            <table class="webform" cellspacing="0" cellpadding="2" border="0">
+                <tr class="hide">
+                    <td>
+                        <input type="hidden" name="CAT_Category" id="CAT_Category" value="{module_customerfield,594052,812514}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="ItemName">Subject</label>
+                        <br />
+                        <input class="cat_textbox_small" type="text" name="ItemName" id="ItemName" maxlength="255" /> &bull;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="CAT_Custom_2">Question <span class="req">*</span>
+                        </label>
+                        <br />
+                        <textarea name="CAT_Custom_2" id="CAT_Custom_2" cols="10" rows="4" class="cat_listbox" onkeydown="if(this.value.length>=4000)this.value=this.value.substring(0,3999);"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="CAT_Custom_3">Related File (100 MB limit)</label>
+                        <br />
+                        <input type="file" name="CAT_Custom_3" id="CAT_Custom_3" class="cat_textbox" />
+                    </td>
+                </tr>
+                <tr class="hide">
+                    <td>
+                        <input type="hidden" name="CAT_Custom_1" id="CAT_Custom_1" value="{module_username}" />
+                    </td>
+                </tr>
+                
+                <tr>
+                    <!-- Liquid List-->
+                    <td>
+                        <label for="CAT_Custom_4">Preferred CPA</label>
+                        <br />
+                        <select name="CAT_Custom_4" id="CAT_Custom_4" class="cat_dropdown">
+                            <option value=" ">-- Please select --</option>
+                            {module_webapps render="collection" id="26466" filter="all" sortType="ALPHABETICAL" collection="CPAList" template=""} 
+                            {% for item in CPAList.items -%}
+                            <option value="{{item.itemid}}">{{item.name}}</option>
+                            {% endfor -%}
+                            <option value="0000">Random CPA</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- Sets default value as submitted -->
+                    <input type="hidden" name="CAT_Custom_5" id="CAT_Custom_5" value="Submitted">
+                </tr>
+                <tr>
+                    <td>
+                        <input class="cat_button" type="submit" value="Submit" id="catcustomcontentbutton" />
+                    </td>
+                </tr>
+            </table>
+            <script type="text/javascript" src="/CatalystScripts/ValidationFunctions.js?vs=b147.r514197-phase1"></script>
+            <script type="text/javascript">
+                //<![CDATA[
+                var submitcount71190 = 0;
+                
+                function checkWholeForm71190(theForm) {
+                    var why = "";
+                    if (theForm.ItemName) why += isEmpty(theForm.ItemName.value, "Item Name");
+                    if (theForm.CAT_Custom_2) why += isEmpty(theForm.CAT_Custom_2.value, "Question");
+                    if (why != "") {
+                        alert(why);
+                        return false;
+                    }
+                    if (submitcount71190 == 0) {
+                        submitcount71190++;
+                        theForm.submit();
+                        return false;
+                    } else {
+                        alert("Form submission is in progress.");
+                        return false;
+                    }
+                }
+                //]]>
+            </script>
+        </form>
+        <!-- Output All CPAs-->
+        {module_webapps render="item" id="26466" filter="all" resultsPerPage="100" rowCount="1" }
+        
+    </div>
+    <script>
+        /*--- TOGGLE SELECTED CPA DATA --- */
+        $('#CAT_Custom_4').change(function() {
+            
+            
+            
+             $('.preferredCPA').hide();
+            var selectedCPA = $(this).val();
+            
+            /*select random CPA*/
+            if(selectedCPA == 0000){
+                console.log("random");
+                var options = $('#CAT_Custom_4').find('option');
+                var item = options[Math.floor(Math.random()*options.length)];
+            
+                $("#CAT_Custom_4").val(item.value);
+                $('.preferredCPA').hide();
+                var selectedCPA = item.value;
+                $('#' + selectedCPA).show();
+            }
+            /*choose selected cpa*/
+            else{
+            	$('#' + selectedCPA).show();
+            }
+            
+        });
+        
+        /*--- Select a random CPA instead of from a list --*/
+        /*$('#randomSelectButton').click(function(){*/
+        $('#regions').change(function() {
+            
+            var options = $('#CAT_Custom_4').find('option');
+            var item = options[Math.floor(Math.random()*options.length)];
+        
+            $("#CAT_Custom_4").val(item.value);
+            $('.preferredCPA').hide();
+            var selectedCPA = item.value;
+            $('#' + selectedCPA).show();
+        });
+                
+        
+        /* --------Toggle Subcategories based on Top Category ---------- */
+        $('#regions').change(function() {
+            
+            var selectedCPACategory = $(this).val();
+            console.log(selectedCPACategory);
+            
+            /* Need to check parent id -- */
+            $("#CAT_Category option").each(function(i){
+                
+                var parentId = $(this).attr('id');
+                if(parentId == selectedCPACategory){
+                    $(this).show();
+                }
+                else{
+                   $(this).hide();
+                }
+       		 });
+            
+        });
+    </script>
+</div><!-- InstanceEndEditable -->
+            </div>
+        </div>
+        </div>
+         {% include"/_System/Includes/footer.inc" %}
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+        </script>
+    
+</body>
+<!-- InstanceEnd --></html>

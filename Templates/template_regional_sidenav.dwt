@@ -1,0 +1,55 @@
+<html>
+<head>
+<!-- TemplateBeginEditable name="doctitle" --><title></title><!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+
+    
+</head>
+<body>
+        {% include"/_System/Includes/head.inc" %} {% include"/_System/Includes/nav.inc" %}
+        <div class="container mt-5">
+        <div class="row">
+        <div class="col-sm-4 sidenav">
+        {% include"/_System/Includes/regional_sidenav.inc" %}
+        </div>
+        <div class="col-sm-8">
+        <!-- TemplateBeginEditable name="ContentArea" -->{tag_pagecontent}<!-- TemplateEndEditable -->
+        </div>
+        </div>
+        </div>
+        <div class="footer mt-5">
+        <div class="container">
+        <div class="row">
+        <div class="col-sm-4">
+        <p>CPA2GO LOGO</p>
+        </div>
+        <div class="col-sm-4">
+        <p>Footer Info .... Interactively monetize equity invested models after team driven customer service. </p>
+        </div>
+        <div class="col-sm-4 footnav">
+        <ul>
+            <li><a href="/">Home</a>
+            </li>
+            <li><a href="/">About</a>
+            </li>
+            <li><a href="/">Our Policies </a>
+            </li>
+            <li><a href="/">Login</a>
+            </li>
+            <li><a href="/">Contact</a>
+            </li>
+        </ul>
+        </div>
+        </div>
+        </div>
+        </div>
+        <!-- /container -->
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+        </script>
+    
+</body>
+</html>

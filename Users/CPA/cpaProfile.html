@@ -1,0 +1,83 @@
+<html><!-- InstanceBegin template="/Templates/template_cpa_sidenav.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" --><title>CPA Profile</title><!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
+        
+        <meta name="description" content="" />
+    <!-- InstanceEndEditable -->
+
+    
+</head>
+<body>
+        {% include"/_System/Includes/head.inc" %} {% include"/_System/Includes/nav.inc" %}
+        
+<div class="container mt-5">
+        <div class="row">
+            <div class="col-sm-4 sidenav">
+                {% include"/_System/Includes/cpa_sidenav.inc" %}
+            </div>
+            <div class="col-sm-8">
+                <!-- InstanceBeginEditable name="ContentArea" -->
+        <div id="public info">
+            <h2>Edit Public Info</h2>
+            <!--Uses backup template-->
+            <!--{module_webappscustomer,26466,a,,,,true,10,false,1} -->
+            
+            {module_webappscustomer id="26466" filter="all" collection="cpaProfile" template=""}
+            {% for item in cpaProfile.items -%}
+            <div class="col-sm-12">
+                <div class="cpaprofilename">{{{item.name}} <span class="profileedit"><a href="{{item.editUrl}}">Edit</a></span>
+                </div>
+                <div class="profilewrapper">
+                    <div class="preferredCPA" id="{{item.itemid}}">
+                        <div class="cpaprofilepic"> <img src="{{item.['profile pic']}}">
+                            <p class="cpaprofileinfo">{{item.description}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="cpaprofilelicense">License Number: {{item.['license number']}}
+                </div>
+            </div>
+			{% endfor -%}
+            
+        </div>
+    <!-- InstanceEndEditable -->
+            </div>
+        </div>
+        </div>
+        <div class="footer mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p>CPA2GO LOGO</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p>Footer Info .... Interactively monetize equity invested models after team driven customer service. </p>
+                    </div>
+                    <div class="col-sm-4 footnav">
+                        <ul>
+                            <li><a href="/">Home</a>
+                            </li>
+                            <li><a href="/">About</a>
+                            </li>
+                            <li><a href="/">Our Policies </a>
+                            </li>
+                            <li><a href="/">Login</a>
+                            </li>
+                            <li><a href="/">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /container -->
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+        </script>
+    
+</body>
+<!-- InstanceEnd --></html>

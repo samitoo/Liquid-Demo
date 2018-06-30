@@ -1,0 +1,135 @@
+<html><!-- InstanceBegin template="/Templates/template_regional_sidenav.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" --><title>Regional Admin Dashboard</title><!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
+        
+        <meta name="description" content="" />
+    <!-- InstanceEndEditable -->
+
+    
+</head>
+<body>
+        {% include"/_System/Includes/head.inc" %} {% include"/_System/Includes/nav.inc" %}
+        <div class="container mt-5">
+        <div class="row">
+        <div class="col-sm-4 sidenav">
+        {% include"/_System/Includes/regional_sidenav.inc" %}
+        </div>
+        <div class="col-sm-8">
+        <!-- InstanceBeginEditable name="ContentArea" -->
+        <h2>My Account Dashboard</h2><br>
+        <h3>List of CPAs filtered by manual zip</h3><br>
+        
+        
+        <h3>user variables</h3>
+        <!--- Extended CRM ID and Zip Field ID, get regional's category parent --> 
+        {module_customerfield,575250,801480 collection="regionalAdminCategory" template=""}
+        
+        
+        <select>
+            {module_categorylist id="{{regionalAdminCategory.value}}" maxLevel = "1" collection="regionalAdminZips"}
+        </select>
+        <div id="jsonoutput" style="max-height:250px; overflow:scroll; border:1px solid black;">
+            <h3>Array of Zips</h3>
+            {% assign collectionOfCats = {{regionalAdminZips}} -%}
+            {% for item in collectionOfCats.items -%}
+            <pre>{{item.name | json}}</pre>
+            {% endfor -%}
+        </div>
+        
+        
+        
+        
+        
+        <!-- Table Header -->
+        <table style="margin-bottom:50px;">
+            <tr>
+                <td>CPA</td>
+                <td>Zip Codes</td>
+                <td>Ticket Count</td>
+                <td>Ticket Links</td>
+        	</tr>
+        <!-- Output CPAs that are under Regional Admin -->
+        {module_webapps render="collection" id="CPAs" filter="all" collection="CPAList" template=""} 
+        {% for item in CPAList.items -%}
+            <!-- Split zips --> 
+            {% assign zips = {{item.['Zip Codes']}} | split: ' ' %}
+            	{% for zip in zips -%}
+                    {% if zip == 75001 -%}<!-- TODO Make this value set from Regional parameter -->        		
+                    <tr>
+                        <td>{{item.name}}</td>
+                        <td>{{item.['Zip Codes']}}</td>
+                        <!-- Output Their Tickets, assign their ID number --><!-- TODO: Filter by Category ID (Zip Parent Category), not All-->
+                        {% assign cpaNumber = {{item.itemid}} -%}
+                        {module_webapps render="collection" id="Customer Questions" filter="all" collection="QuestList" template=""}
+                        {% for item in QuestList.items -%}
+                            {% if item.['Preferred CPA_id'] == cpaNumber -%}
+                        	<td>{{item.name}}</td>
+                            {% endif -%}
+                        {% endfor -%}
+                    </tr>
+                    {% endif -%}
+            	{% endfor -%}
+            {% endfor -%}
+        </table>
+        
+        
+        
+        
+        
+        <!--- JSON Test Output -->
+        <h2>Json Output of CPAs Filtered by Zip</h2>
+        <div id="jsonoutput" style="max-height:500px; overflow:scroll; border:1px solid black;">
+        {% for item in CPAList.items -%}
+        {% if item.['Zip Codes'] == 75001 -%}        		
+        <pre>{{ item | json }}</pre>
+        {% endif -%}
+        {% endfor -%}
+        </div>
+        
+        
+        
+        
+        
+        
+        
+    <!-- InstanceEndEditable -->
+        </div>
+        </div>
+        </div>
+        <div class="footer mt-5">
+        <div class="container">
+        <div class="row">
+        <div class="col-sm-4">
+        <p>CPA2GO LOGO</p>
+        </div>
+        <div class="col-sm-4">
+        <p>Footer Info .... Interactively monetize equity invested models after team driven customer service. </p>
+        </div>
+        <div class="col-sm-4 footnav">
+        <ul>
+            <li><a href="/">Home</a>
+            </li>
+            <li><a href="/">About</a>
+            </li>
+            <li><a href="/">Our Policies </a>
+            </li>
+            <li><a href="/">Login</a>
+            </li>
+            <li><a href="/">Contact</a>
+            </li>
+        </ul>
+        </div>
+        </div>
+        </div>
+        </div>
+        <!-- /container -->
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+        </script>
+    
+</body>
+<!-- InstanceEnd --></html>

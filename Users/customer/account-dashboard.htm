@@ -1,0 +1,56 @@
+<html><!-- InstanceBegin template="/Templates/template_user_sidenav.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" --><title></title><!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" --><!-- InstanceEndEditable -->
+
+    
+</head>
+<body>
+        {% include"/_System/Includes/head.inc" %} {% include"/_System/Includes/nav.inc" %}
+        
+<div class="container mt-5">
+        <div class="row">
+            <div class="col-sm-4 sidenav">
+                {% include"/_System/Includes/user_sidenav.inc" %}
+            </div>
+            <div class="col-sm-8">
+                <!-- InstanceBeginEditable name="ContentArea" --><h2>My Account Dashboard</h2>
+<p>
+</p>
+
+{module_webappscustomer id="26435" filter="all" collection="questions" template=""} 
+{% for item in questions.items %} 
+
+{% if item.status == 'Submitted' or item.status == 'Answered' -%}
+<div class="appcardwrap">
+    <div class="card col-sm-12 col-md-6">
+        <div class="card-body">
+            <h5 class="card-title card-head">Status: {{item.status}}<span>#{{item.itemid}}</span></h5>
+            <div class="cardpad">
+                <h5 class="card-title">Title: {{item.name}}</h5>
+                <h5 class="card-title">Date: {{item.lastUpdateDate | date: 'ddd, MMM dd, yyyy'}}</h5>
+                <h5 class="card-title">CPA: {{item.['Preferred CPA']}}</h5>
+                <p class="card-text"><a href="{{item.Url}}" class="card-link"><button>Open</button></a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif -%} 
+{%endfor%}
+
+
+
+<!-- InstanceEndEditable -->
+            </div>
+        </div>
+        </div>
+         {% include"/_System/Includes/footer.inc" %}
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+        </script>
+    
+</body>
+<!-- InstanceEnd --></html>

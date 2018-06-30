@@ -1,0 +1,37 @@
+<div>
+    <button onclick="goBack()">Go Back</button>
+    
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    
+    <div>
+        <div>
+            <label>Question ID</label>
+            <br> {module_oid}
+        </div>
+        <div>
+            <label>Title</label>
+            <br> {tag_name}
+        </div>
+        <div>
+            <label>Question:</label>
+            <br>{tag_question}
+        </div>
+        <div>
+            <label>CPA: </label>
+            <br> {tag_preferred cpa}
+        </div>
+        <div>
+            <label>Related Files: </label>
+            <br> {tag_related files_value}
+        </div>
+        <div>
+            <label>Answer: </label>
+            <br> {tag_answer}
+        </div>
+    </div>
+    
+</div>

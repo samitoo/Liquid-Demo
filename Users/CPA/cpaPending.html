@@ -1,0 +1,94 @@
+<html><!-- InstanceBegin template="/Templates/template_cpa_sidenav.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" --><title>Closed Tickets</title><!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
+        
+        <meta name="description" content="" />
+    <!-- InstanceEndEditable -->
+
+    
+</head>
+<body>
+        {% include"/_System/Includes/head.inc" %} {% include"/_System/Includes/nav.inc" %}
+        
+<div class="container mt-5">
+        <div class="row">
+            <div class="col-sm-4 sidenav">
+                {% include"/_System/Includes/cpa_sidenav.inc" %}
+            </div>
+            <div class="col-sm-8">
+                <!-- InstanceBeginEditable name="ContentArea" -->
+        <body>
+        
+        <!--Launch the CPA app, find their one entry, should only have 1, and get their CPA ID from it -->
+        {module_webappscustomer id="26466", filter="all", collection="idEntry" template=""}
+        {% for item in idEntry.items %}
+        {% assign CPAID = item.itemID %}
+        <p>CPA ID: </p>
+        <pre>{{CPAID | json }}</pre>
+        {%endfor%}
+        
+        <h2>ASSIGNED PENDING QUESTIONS</h2>
+        
+        <!--Show assigned and CLOSED tickets --> 
+        {module_webapps id="26435" filter="all" collection="questions" template=""}
+        {% for item in questions.items %}
+        <!--Grab only tickets assigned to them --> 
+        {% if item.['Preferred CPA_id'] == CPAID -%}
+            {% if item.status == 'Answered' -%}
+                <div class="appcardwrap">
+                    <div class="card col-sm-12 col-md-6">
+                        <div class="card-body">
+                            <h5 class="card-title card-head">Status: {{item.status}}<span>#{{item.itemid}}</span></h5>
+                            <div class="cardpad">
+                                <h5 class="card-title">Title: {{item.name}}</h5>
+                                <h5 class="card-title">Date: {{item.lastUpdateDate | date: 'ddd, MMM dd, yyyy'}}</h5>
+                                <p class="card-text"><a href="{{item.editUrl}}" class="card-link"><button>Open</button></a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif -%}
+        {% endif -%}
+        {%endfor%}
+    </body>
+    <!-- InstanceEndEditable -->
+            </div>
+        </div>
+        </div>
+        <div class="footer mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p>CPA2GO LOGO</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p>Footer Info .... Interactively monetize equity invested models after team driven customer service. </p>
+                    </div>
+                    <div class="col-sm-4 footnav">
+                        <ul>
+                            <li><a href="/">Home</a>
+                            </li>
+                            <li><a href="/">About</a>
+                            </li>
+                            <li><a href="/">Our Policies </a>
+                            </li>
+                            <li><a href="/">Login</a>
+                            </li>
+                            <li><a href="/">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /container -->
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+        </script>
+    
+</body>
+<!-- InstanceEnd --></html>

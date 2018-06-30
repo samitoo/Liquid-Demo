@@ -1,0 +1,102 @@
+<div id="submissionForm">
+    
+    <!--Launch the CPA app, find their one entry, should only have 1, and get their CPA ID from it -->
+    {module_webappscustomer id="26466", filter="all", collection="idEntry" template=""} 
+    {% for item in idEntry.items %} {% assign CPAID = item.itemID %}
+    <p>CPA ID: </p><pre>{{CPAID | json }}</pre> 
+    {%endfor%}
+    
+    <!-- Get question app collection for current ID to check for related files -->
+    {module_webapps id="26435" filter="item" itemid="{tag_itemid}" collection="question" template=""} 
+    
+    
+    <form name="catcustomcontentform23092" onsubmit="return checkWholeForm23092(this)" enctype="multipart/form-data" method="post" action="/CustomContentProcess.aspx?A=EditSave&CCID=26435&amp;OID={module_oid}&amp;OTYPE={module_otype}">
+<div class="table-responsive">        
+<table class="webform table" cellspacing="0" cellpadding="2" border="0">
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="ItemName">Item Name</label>
+                        <br />
+                        <input class="cat_textbox_small" type="text" name="ItemName" id="ItemName" maxlength="255" /> &bull;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="CAT_Custom_2">Question <span class="req">*</span>
+                        </label>
+                        <br />
+                        <textarea name="CAT_Custom_2" id="CAT_Custom_2" cols="10" rows="4" class="cat_listbox" onkeydown="if(this.value.length&gt;=4000)this.value=this.value.substring(0,3999);"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="CAT_Custom_3">Related File</label>
+                        <br />
+                        <!--<input type="file" name="CAT_Custom_3" id="CAT_Custom_3" class="cat_textbox" />-->
+                        
+                        {% for item in question.items %}
+                            {% if item.['related files'] == "" -%}
+                                No Files Found
+                            {% else -%}
+                            	<a href="{tag_related files}" target="_blank">Related File</a>
+                            {% endif -%}
+                        {%endfor%}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                            <input type="hidden" name="CAT_Custom_4" id="CAT_Custom_4" class="cat_dropdown" value="{{CPAID}}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="CAT_Custom_5">Status</label>
+                        <br />
+                        <select name="CAT_Custom_5" id="CAT_Custom_5" class="cat_dropdown">
+                            <option value=" ">-- Please select --</option>
+                            <option value="Submitted">Submitted</option>
+                            <option value="Answered">Answered</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="cat_button" type="submit" value="Submit" id="catcustomcontentbutton" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>{module_goback text="Cancel"}</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <script type="text/javascript" src="/CatalystScripts/ValidationFunctions.js?vs=b139.r513877-phase1"></script>
+        <script type="text/javascript">
+            //<![CDATA[
+            var submitcount23092 = 0;
+            
+            function checkWholeForm23092(theForm) {
+                var why = "";
+                if (theForm.ItemName) why += isEmpty(theForm.ItemName.value, "Item Name");
+                if (theForm.CAT_Custom_2) why += isEmpty(theForm.CAT_Custom_2.value, "Question");
+                if (why != "") {
+                    alert(why);
+                    return false;
+                }
+                if (submitcount23092 == 0) {
+                    submitcount23092++;
+                    theForm.submit();
+                    return false;
+                } else {
+                    alert("Form submission is in progress.");
+                    return false;
+                }
+            }
+            //]]>
+        </script>
+    </form>
+</div>
+
+
+

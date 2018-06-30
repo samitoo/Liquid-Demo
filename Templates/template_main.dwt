@@ -1,0 +1,58 @@
+<html>
+<head>
+<!-- TemplateBeginEditable name="doctitle" --><title></title><!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+
+        {% include"/_System/Includes/head.inc" %}
+    
+</head>
+<body>
+        {% include"/_System/Includes/nav.inc" %}
+        
+        <!-----END MAIN Nav----->
+        <!-----START CONTENT AREA----->
+        <div class="container mt-5">
+            <div class="row">
+                <!-- TemplateBeginEditable name="ContentArea" -->{tag_pagecontent}<!-- TemplateEndEditable -->
+            </div>
+        </div>
+        <!-----END CONTENT AREA----->
+        <!-----START FOOTER----->
+        <div class="footer mt-5">
+            <div class="container">
+                <div class="row">
+                    
+                    <div class="col-sm-4">
+                        <p>CPA2GO LOGO</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p>Footer Info .... Interactively monetize equity invested models after team driven customer service. </p>
+                    </div>
+                    <div class="col-sm-4 footnav">
+                        <ul>
+                            <li><a href="/">Home</a>
+                            </li>
+                            <li><a href="/">About</a>
+                            </li>
+                            <li><a href="/">Our Policies </a>
+                            </li>
+                            <li><a href="/">Login</a>
+                            </li>
+                            <li><a href="/">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- /container -->
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+        </script>
+    
+</body>
+</html>

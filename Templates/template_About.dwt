@@ -1,0 +1,50 @@
+<html>
+<head>
+<!-- TemplateBeginEditable name="doctitle" --><title></title><!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+
+    
+</head>
+<body>
+        {% include"/_System/Includes/head.inc" %}
+        {% include"/_System/Includes/nav.inc" %}
+        <div class="inner-banner">
+            <img src="/_assets/img/inner-banner.jpg" />
+            <div class="bnrover">
+                <div class="pagename1">
+                    {module_pagename}
+                </div>
+            </div>               
+        </div>
+        <div class="row bgrowwhite homesteps">
+        <div class="col-md-12">
+        <!-- TemplateBeginEditable name="ContentArea" -->{tag_pagecontent}<!-- TemplateEndEditable --></div>
+        </div>
+        <div class="row testimonials">
+        <h2>Why People Love CPA2GO</h2>
+        <div class="col-lg-4"> <img alt="" class="rounded-circle" src="/_assets/img/testimonial_Berkshire Hathaway.jpg" width="140" height="140" />
+        <p>I have used CPA2GO for many of my business tax questions.  They have saved me a lot of time and money by being great at what they do. I highly recommend CPA2GO to anyone looking for answers to personal or business accounting questions.</p>
+        <h4>Leighton Allen</h4>
+        <span class="subtext">Broker, Ally Real Estate</span> </div>
+        <!-- /.col-lg-4 -->
+        <div class="col-lg-4"> <img class="rounded-circle" src="/_assets/img/testimonial_DJ_HW.jpg" alt="Generic placeholder image" width="140" height="140" />
+        <p>CPA2GO has been a great asset to my business. They have saved me time and money by answering my specific tax questions thoroughly.</p>
+        <h4>DJ Thomas</h4>
+        <span class="subtext">Manager, Hemingway West</span> </div>
+        <!-- /.col-lg-4 -->
+        <div class="col-lg-4"> <img class="rounded-circle" src="/_assets/img/testimonial_leslie .JPG" alt="Generic placeholder image" width="140" height="140" />
+        <p>As a business owner, I trust the expertise and guidance of CPA2GO.  The professionals at CPA2GO really made my life easier when it came to my tax questions.</p>
+        <h4>Leslie Hankins</h4>
+        <span class="subtext">Owner, Larousse Events</span> </div>
+        <!-- /.col-lg-4 -->
+        </div>
+        {% include"/_System/Includes/footer.inc" %}
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+        </script>
+    
+</body>
+</html>

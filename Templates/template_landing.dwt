@@ -1,0 +1,155 @@
+<html>
+<head>
+<!-- TemplateBeginEditable name="doctitle" --><title></title><!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+
+        {% include"/_System/Includes/head.inc" %}
+    
+</head>
+<body>
+        {% include"/_System/Includes/nav.inc" %}
+        <div class="row mainbanner">
+            <div class="col-md-8">
+                <h2>Reliable answers from real professionals, when you need them
+.</h2>
+                <p class="lead">We provide a reliable source of tax, accounting and professional advice in a timely manner. You may have a quick question, need a second opinion or require important confirmation regarding a timely business decision. We can help! </p>
+                <a href="/login"><button type="submit" class="btn btn-primary">Ask A Question!</button></a>
+            </div>
+            <div class="col-md-4"> </div>
+        </div>
+        <div class="row bgrowwhite homesteps">
+            <div class="col-sm-12">
+
+                        <h3 class="stephead">CPA2GO Is Easy To Use</h3>
+ 
+            </div>
+            <div class="col-sm-4">
+                <div class="card"> <img class="card-img-top" src="/_assets/img/signup.png" alt="Card image cap">
+                    <div class="card-bodys">
+                        <h3>
+                            Sign Up</h3>
+                        <p class="card-text">Signing up with CPA2GO is as easy as creating a username, password and entering your payment information.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card"> <img class="card-img-top" src="/_assets/img/ask1.png" alt="Card image cap">
+                    <div class="card-bodys">
+                        <h3>
+                            Ask a Question</h3>
+                        <p class="card-text">Submit your tax question to one of our licensed CPA’s.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card"> <img class="card-img-top" src="/_assets/img/cparesp.png" alt="Card image cap">
+                    <div class="card-bodys">
+                        <h3>
+                            CPA Responds</h3>
+                        <p class="card-text">Receive a response from a licensed CPA within 12 hours of submitting your question.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row bgrowblue">
+            <div class="col-sm-6">
+                <h2>The CPA2GO Story</h2> <!-- TemplateBeginEditable name="ContentArea" -->{tag_pagecontent}<!-- TemplateEndEditable --> </div>
+            <div class="col-sm-6">
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/4s9ipSAqtGk?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media"
+                allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="row tryitrow hide">
+            <div class="col-sm-12 col-md-10 mx-auto hide">
+                <h3>Lorem ipsum dolor sit amet, consectetur adipiscing felis at accumsan rhoncus
+                    <a href="/Users/customer/ask_a_question"><button type="submit" class="btn btn-primary">Try it Now</button></a>
+                </h3>
+            </div>
+        </div>
+        <div class="row bgbottom">
+            <div class="card col-sm-6 text-center hide">
+                <h5 class="card-title">Own a business?</h5>
+                <img class="card-img-top" src="/_assets/img/own.jpg" alt="Own a Business">
+                <div class="card-body">
+                    <p class="card-text">We know how important your business is to you. CPA2GO provides you answers to your business tax questions in a timely manner. </p>
+                    <a href="/about" class="btn btn-primary">Learn More</a> </div>
+            </div>
+            <div class="card col-sm-6 text-center hide">
+                <h5 class="card-title">Can I write this off?</h5>
+                <img class="card-img-top" src="/_assets/img/writeoff.jpg" alt="Write off">
+                <div class="card-body">
+                    <p class="card-text">As a business professional, you have a ton of business expenses. CPA2GO can answer crucial “write off” questions you may have. </p>
+                    <a href="/about" class="btn btn-primary">Learn More</a> </div>
+            </div>
+           <!---- <div class="col-sm-6 textfit">
+                <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adipiscing felis at accumsan rhoncus</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing felis at accumsan rhoncuLorem ipsum dolor sit amet, consectetur adipiscing felis at
+                    accumsan rhoncuLorem ipsum dolor sit amet, consectetur adipiscing felis at accumsan rhoncuLorem ipsum dolor sit amet, consectetur adipiscing
+                    felis at accumsan rhoncu.</p>
+            </div>
+            <div class="col-sm-6"><img class="homefit" src="/_assets/img/phonebg.png" /> </div>--->
+            <div class="col-sm-6"><img class="homefit" src="/_assets/img/multi.png" /> </div>
+            <div class="col-sm-6 textfitright">
+                <h5 class="card-title">Access CPA2GO from any device!</h5>
+                <p>CPA2GO was designed to work efficiently on all desktops, laptops, tablets and mobile phones. Your tax questions answered anytime from any device!</p>
+            </div>
+        </div>
+        <div class="row tryitrow">
+            <div class="col-sm-12 col-md-10 mx-auto">
+                <h3>Signing up with CPA2GO is as easy as creating a username, password and entering your payment information.
+                </h3><p class="text-center">
+                    <a href="/login"><button type="submit" class="btn btn-primary">Sign Up Today</button></a></p>
+            </div>
+        </div>
+        <div class="row bgbottom ">
+            
+            <div class="col-sm-6 hide"><img class="homefit" src="/_assets/img/people.png" /> </div>
+            <div class="col-sm-6 textfitright hide">
+                <h5 class="card-title">We are here to help you!</h5>
+                <p>Get trusted support whenever you need it. The support team at CPA2GO is available 24/7 to answer any questions you may have regarding your business taxes.</p>
+            </div>
+            
+            <div class="col-md-8 ml-auto pt-5 mr-auto hide">
+                <div class="section-description hide">
+                    <h5 class="card-title">Lorem ipsum dolor sit</h5>
+                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing felis at accumsan rhoncus
+                Lorem ipsum dolor sit amet, consectetur adipiscing felis at accumsan rhoncuLorem ipsum dolor sit amet, consectetur adipiscing felis at
+                    accumsan rhoncuLorem ipsum dolor sit amet.</p>
+                    <button type="submit" class="btn btn-primary">Sign Up Today</button>
+                </div>
+            </div>
+            
+            
+            
+        </div>
+        
+        
+        <!--<div class="row testimonials">
+            <h2>Why People Love CPA2GO</h2>
+            <div class="col-lg-4"> <img class="rounded-circle" src="/_assets/img/testimonial1.jpg" alt="" width="140" height="140">
+                <p>It makes my life so much easier. I wish I had this when I first started my business!</p>
+                <h4>John Doe</h4>
+                <span class="subtext">CEO Awesome Company</span> </div>
+         
+            <div class="col-lg-4"> <img class="rounded-circle" src="/_assets/img/testimonial2.jpg" alt="Generic placeholder image" width="140" height="140">
+                <p>It makes my life so much easier. I wish I had this when I first started my business!</p>
+                <h4>John Doe</h4>
+                <span class="subtext">CEO Awesome Company</span> </div>
+          
+            <div class="col-lg-4"> <img class="rounded-circle" src="/_assets/img/testimonial3.jpg" alt="Generic placeholder image" width="140" height="140">
+                <p>It makes my life so much easier. I wish I had this when I first started my business!</p>
+                <h4>John Doe</h4>
+                <span class="subtext">CEO Awesome Company</span> </div>
+           
+        </div>-->
+        {% include"/_System/Includes/footer.inc" %}
+        
+    
+
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+        </script>
+    
+</body>
+</html>

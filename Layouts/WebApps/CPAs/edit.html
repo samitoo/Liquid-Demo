@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+    </head>
+    
+    <body>
+        {% include"/_System/Includes/head.inc" %} {% include"/_System/Includes/nav.inc" %}
+        
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-sm-4 sidenav">
+                    {% include"/_System/Includes/cpa_sidenav.inc" %}
+                </div>
+                <div class="col-sm-8">
+                    <form name="catcustomcontentform80539" onsubmit="return checkWholeForm80539(this)" enctype="multipart/form-data" method="post" action="/CustomContentProcess.aspx?A=EditSave&CCID=26466&OID={module_oid}&OTYPE={module_otype}">
+                        <div class="table-responsive">
+                            <table class="webform table" cellspacing="0" cellpadding="2" border="0">
+                                <tr>
+                                    <td>
+                                        <label for="ItemName">Item Name</label>
+                                        <br />
+                                        <input class="cat_textbox_small" type="text" name="ItemName" id="ItemName" maxlength="255" /> &bull;</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="ItemDescription">Profile Description</label>
+                                        <br />
+                                        <textarea name="ItemDescription" id="ItemDescription" cols="10" rows="4" class="cat_listbox" text=""></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Current Profile Pic:</label>
+                                        <br>
+                                        <img src="{tag_profile pic_value}" style="width:100px;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="CAT_Custom_1">Update Profile Pic <span class="req">*</span>
+                                        </label>
+                                        <br />
+                                        <input type="file" name="CAT_Custom_1" id="CAT_Custom_1" class="cat_textbox" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input class="cat_button" type="submit" value="Submit" id="catcustomcontentbutton" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <script type="text/javascript" src="/CatalystScripts/ValidationFunctions.js?vs=b139.r513877-phase1"></script>
+                        <script type="text/javascript">
+                            //<![CDATA[
+                            var submitcount80539 = 0;
+                            
+                            function checkWholeForm80539(theForm) {
+                                var why = "";
+                                if (theForm.ItemName) why += isEmpty(theForm.ItemName.value, "Item Name");
+                                if (why != "") {
+                                    alert(why);
+                                    return false;
+                                }
+                                if (submitcount80539 == 0) {
+                                    submitcount80539++;
+                                    theForm.submit();
+                                    return false;
+                                } else {
+                                    alert("Form submission is in progress.");
+                                    return false;
+                                }
+                            }
+                            //]]>
+                        </script>
+                    </form>
+                    {module_goback text="Cancel"}
+                </div>
+            </div>
+        </div>
+        <div class="footer mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p>CPA2GO LOGO</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p>Footer Info .... Interactively monetize equity invested models after team driven customer service. </p>
+                    </div>
+                    <div class="col-sm-4 footnav">
+                        <ul>
+                            <li><a href="/">Home</a>
+                            </li>
+                            <li><a href="/">About</a>
+                            </li>
+                            <li><a href="/">Our Policies </a>
+                            </li>
+                            <li><a href="/">Login</a>
+                            </li>
+                            <li><a href="/">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /container -->
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+        </script>
+    </body>
+    
+</html>

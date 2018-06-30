@@ -1,0 +1,14 @@
+<div class="appcardwrap">
+    <div class="card col-sm-12 col-md-6">
+        <div class="card-body">
+            <h5 class="card-title card-head">Status: {tag_status}<span>#{tag_itemid}</span></h5>
+            <div class="cardpad">
+                <h5 class="card-title">Title: {tag_name}</h5>
+                <h5 class="card-title">Date: {{item.lastUpdateDate | date: 'ddd, MMM dd, yyyy'}}</h5>
+                <h5 class="card-title">CPA: {tag_preferred cpa}</h5>
+                <p class="card-text">Details: {tag_question} <a href="{{item.editUrl}}" class="card-link">...read more</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

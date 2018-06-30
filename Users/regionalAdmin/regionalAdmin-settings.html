@@ -1,0 +1,211 @@
+<html><!-- InstanceBegin template="/Templates/template_regional_sidenav.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" --><title>Regional Admin Settings</title><!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
+        
+        <meta name="description" content="" />
+    <!-- InstanceEndEditable -->
+
+    
+</head>
+<body>
+        {% include"/_System/Includes/head.inc" %} {% include"/_System/Includes/nav.inc" %}
+        <div class="container mt-5">
+        <div class="row">
+        <div class="col-sm-4 sidenav">
+        {% include"/_System/Includes/regional_sidenav.inc" %}
+        </div>
+        <div class="col-sm-8">
+        <!-- InstanceBeginEditable name="ContentArea" -->
+        <h2>My Account Settings</h2>
+        <form name="catupdatedetailsformform4339" method="post" enctype="multipart/form-data" onsubmit="return checkWholeForm4339(this)" action="/MemberProcess.aspx">
+            <p>&bull; Required</p>
+            <table class="webform" cellspacing="0" cellpadding="2" border="0">
+                <tr>
+                    <td>
+                        <label for="FirstName">First Name</label>
+                        <br />
+                        <input type="text" name="FirstName" id="FirstName" value="{module_firstname}" class="cat_textbox" maxlength="255" /> &bull;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="LastName">Last Name</label>
+                        <br />
+                        <input type="text" name="LastName" id="LastName" value="{module_lastname}" class="cat_textbox" maxlength="255" /> &bull;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="EmailAddress">Email Address</label>
+                        <br />
+                        <input type="text" name="EmailAddress" id="EmailAddress" value="{module_emailaddress}" class="cat_textbox" maxlength="255" /> &bull;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="WorkPhone">Work Phone Number</label>
+                        <br />
+                        <input type="text" name="WorkPhone" id="WorkPhone" value="{module_workphone}" class="cat_textbox" maxlength="255" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="HomePhone">Home Phone Number</label>
+                        <br />
+                        <input type="text" name="HomePhone" id="HomePhone" value="{module_homephone}" class="cat_textbox" maxlength="255" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="CellPhone">Cell Phone Number</label>
+                        <br />
+                        <input type="text" name="CellPhone" id="CellPhone" value="{module_cellphone}" class="cat_textbox" maxlength="255" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="HomeAddress">Home Address</label>
+                        <br />
+                        <input type="text" name="HomeAddress" id="HomeAddress" value="{module_homeaddress}" class="cat_textbox" maxlength="500" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="HomeCity">City</label>
+                        <br />
+                        <input type="text" name="HomeCity" id="HomeCity" value="{module_homecity}" class="cat_textbox" maxlength="255" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="HomeState">State</label>
+                        <br />
+                        <input type="text" name="HomeState" id="HomeState" value="{module_homestate}" class="cat_textbox" maxlength="255" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="HomeZip">Zipcode/Postcode</label>
+                        <br />
+                        <input type="text" name="HomeZip" id="HomeZip" value="{module_homezip}" class="cat_textbox" maxlength="255" />
+                    </td>
+                </tr>
+               
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                
+               
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="Username">Username</label>
+                        <br />
+                        <input type="text" name="Username" id="Username" value="{module_username}" class="cat_textbox" maxlength="255" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="Password">Password</label>
+                        <br />
+                        <input type="password" name="Password" id="Password" value="{module_password}" class="cat_textbox" maxlength="255" autocomplete="off" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="PasswordConfirm">Confirm Password</label>
+                        <br />
+                        <input type="password" name="PasswordConfirm" id="PasswordConfirm" value="{module_password}" class="cat_textbox" maxlength="255" autocomplete="off"
+                        />
+                    </td>
+                </tr>
+                <input type="hidden" name="FormID" id="FormID" value="" />
+                <tr>
+                    <td>
+                        <input class="cat_button" type="submit" value="Submit" id="catupdatedetailsformbutton" />
+                    </td>
+                </tr>
+            </table>
+            <script type="text/javascript" src="/CatalystScripts/ValidationFunctions.js?vs=b147.r514197-phase1"></script>
+            <script type="text/javascript" src="/CatalystScripts/Java_DatePicker.js?vs=b147.r514197-phase1"></script>
+            <script type="text/javascript">
+                //<![CDATA[
+                if (document.getElementById('Title') != null) document.getElementById('Title').value = '{module_title}';
+                if (document.getElementById('HomeCountry') != null) document.getElementById('HomeCountry').value = '{module_homecountry}';
+                if (document.getElementById('WorkCountry') != null) document.getElementById('WorkCountry').value = '{module_workcountry}';
+                var submitcount4339 = 0;
+                
+                function checkWholeForm4339(theForm) {
+                    var why = "";
+                    if (theForm.FirstName) why += isEmpty(theForm.FirstName.value, "First Name");
+                    if (theForm.LastName) why += isEmpty(theForm.LastName.value, "Last Name");
+                    if (theForm.EmailAddress) why += checkEmail(theForm.EmailAddress.value);
+                    if (theForm.Password && theForm.PasswordConfirm) {
+                        if (theForm.Password.value.length > 0 || theForm.PasswordConfirm.value.length > 0) {
+                            if (theForm.Password.value != theForm.PasswordConfirm.value) why += appendBreak(
+                                "- Password and its confirmation do not match.");
+                            if (theForm.Password.value.length < 6) why += appendBreak("- Password must be 6 characters or longer.");
+                        }
+                    }
+                    if (why != "") {
+                        alert(why);
+                        return false;
+                    }
+                    if (submitcount4339 == 0) {
+                        submitcount4339++;
+                        theForm.submit();
+                        return false;
+                    } else {
+                        alert("Form submission is in progress.");
+                        return false;
+                    }
+                }
+                //]]>
+            </script>
+        </form>
+    <!-- InstanceEndEditable -->
+        </div>
+        </div>
+        </div>
+        <div class="footer mt-5">
+        <div class="container">
+        <div class="row">
+        <div class="col-sm-4">
+        <p>CPA2GO LOGO</p>
+        </div>
+        <div class="col-sm-4">
+        <p>Footer Info .... Interactively monetize equity invested models after team driven customer service. </p>
+        </div>
+        <div class="col-sm-4 footnav">
+        <ul>
+            <li><a href="/">Home</a>
+            </li>
+            <li><a href="/">About</a>
+            </li>
+            <li><a href="/">Our Policies </a>
+            </li>
+            <li><a href="/">Login</a>
+            </li>
+            <li><a href="/">Contact</a>
+            </li>
+        </ul>
+        </div>
+        </div>
+        </div>
+        </div>
+        <!-- /container -->
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+        </script>
+    
+</body>
+<!-- InstanceEnd --></html>
