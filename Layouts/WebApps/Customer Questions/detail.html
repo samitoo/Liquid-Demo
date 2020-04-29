@@ -1,3 +1,6 @@
+{% if {{globals.user.entityId}} == {tag_submitted customer id} -%}
+
+
 <div>
     <button onclick="goBack()">Go Back</button>
     
@@ -35,3 +38,6 @@
     </div>
     
 </div>
+{% else %}
+<p>Page Not Found</p>
+{% endif -%}

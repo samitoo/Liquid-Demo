@@ -1,0 +1,139 @@
+<html><!-- InstanceBegin template="/Templates/template_simple_detail_listing.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" --><title></title><!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" --><!-- InstanceEndEditable -->
+
+    
+</head>
+<body>
+        {% include"/_System/Includes/head.inc" %} {% include"/_System/Includes/nav.inc" %}
+        <div class="inner-banner">
+        <img alt="" src="/_assets/img/inner-banner.jpg" />
+        <div class="bnrover">
+        <div class="pagename1">
+        CPA2GO
+        </div>
+        </div>
+        </div>
+        <div class="row bgrowwhite homesteps">
+        <div class="col-md-12">
+        <!-- InstanceBeginEditable name="ContentArea" --><h3>All Customers</h3> 
+
+{module_data resource="customers" version="v3" fields="id,email1,firstName" skip="0" limit="10" order="id" collection="myData"}
+<div style="height: 300px; overflow: scroll;">
+    <pre>{{myData|json}}</pre>
+</div>
+
+<h3>All Questions</h3> 
+{module_webapps id="26435" filter="all" collection="questions" template=""}
+<div style="height: 300px; overflow: scroll;">
+    <pre>{{questions  | json}}</pre>
+</div>
+
+<h3>All CPAs</h3> 
+{module_webapps render="collection" filter="all" id="26466" collection="CPAList" template=""}
+<div style="height: 300px; overflow: scroll;">
+    <pre>{{CPAList | json}}</pre>
+</div>
+<!-- Find a way to grab the CPA's email address from the CPA App ID --->
+{% assign samiNum = "5372963" -%} 
+
+{% for item in CPAList.items -%} 
+{% if item.itemId == samiNum %} 
+{{item.name}} 
+{% endif %} 
+{% endfor %} 
+{{globals.user.firstname}}
+
+<input class="cat_button" type="button" value="Test Email JS!" id="emailTest" />
+
+<script>
+    /*--Email the CPA, wait 1 second and then submit the question --*/
+    $("#emailTest").click(function() {
+        
+        console.log('clicked');
+        $(".toggleblock").toggle();
+        
+        var templateParams = {
+            to_name: '{{globals.user.firstname}}',
+            to_email: 'sammy@hemingwaywest.com'
+        };
+        emailjs.send('default_service', 'question_submitted', templateParams)
+        .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+            window.location.href = "/";
+        }, function(error) {
+            console.log('FAILED...', error);
+        });
+        
+    });
+</script>
+<style>
+    /*Create a spinning load icon*/
+    .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        position:fixed;
+        top:50%;
+        left:50%;
+        -webkit-animation: spin 2s linear infinite;
+        /* Safari */
+        animation: spin 2s linear infinite;
+    }
+    /* Safari */
+    
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    
+    /*Dims the screen while loading*/
+    .loadBlocker{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: gray;
+        opacity: .7;
+    }
+</style>
+
+<div class="toggleLoaderblock" style="display:none;">
+    <div class="loadBlocker">
+        <div class="loader"></div>
+    </div>
+</div>
+
+
+
+
+
+<!-- InstanceEndEditable --></div>
+        </div>
+        {% include"/_System/Includes/loadingIcon.inc" %}
+        {% include"/_System/Includes/footer.inc" %}
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+        </script>
+    
+</body>
+<!-- InstanceEnd --></html>

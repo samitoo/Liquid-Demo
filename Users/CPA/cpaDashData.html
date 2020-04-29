@@ -162,6 +162,37 @@
        		{% endif -%}
         {%endfor%}
         
+        <div id="tableCheck" style="float:left;">
+        <h2>ASSIGNED QUESTIONS TABLE VIEW</h2>
+        <!--Filter questions that have been assigned to their ID-->
+        <!--Uses detail view for link-->
+        <div class="table-responsive">
+        <table style="margin-bottom: 50px;">
+            <tbody>
+                <tr>
+                    <td>Date</td>
+                    <td>Ticket</td>
+                    <td>Status</td>
+                    <td>Name</td>
+                    <td>Link</td>
+                </tr>
+        {module_webapps id="26435" filter="all" collection="questions" template=""}
+        {% for item in questions.items %}
+        {% if item.['Preferred CPA_id'] == CPAID -%}
+                <!-- Output assigned tickets -->
+                <tr>
+                    <td>{{item.lastupdatedate}}</td>
+                    <td>{{item.itemid}}</td>
+                    <td>{{item.status}}</td>
+                    <td>{{item.name}}</td>
+                    <td><a href="{{item.editUrl}}">View Ticket</a></td>
+                </tr>
+                {% endif -%}
+        {%endfor%}
+            </tbody>
+        </table>
+        </div>
+        </div>
         
     <!-- InstanceEndEditable -->
             </div>

@@ -10,10 +10,6 @@
     </li>
     <li><a href="/Users/CPA/cpaProfile">Profile</a>
     </li>
-    <li><a href="/Users/CPA/cpaDashData">CPA Data Page</a>
-    </li>
-    <li><a href="/LogOutProcess.aspx">Log Out</a>
-    </li>
-    <li><a href="/contact-us">Contact Support</a>
+    <li><a href="/contact-us" target="_blank">Contact Support</a>
     </li>
 </ul>

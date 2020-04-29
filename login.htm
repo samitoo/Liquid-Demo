@@ -17,50 +17,71 @@
         <div class="row bgrowwhite homesteps">
             <div class="col-md-12">
                 <!-- InstanceBeginEditable name="ContentArea" --><div class="text-center">
-    <div class="secure-login">
-        <h3>SECURE ZONE LOGIN</h3>
-        <form name="catseczoneform86000" onsubmit="return checkWholeForm86000(this)" method="post" action="https://beancounters.worldsecuresystems.com/ZoneProcess.aspx?ZoneID=51&Referrer={module_siteUrl,true,true}&OID={module_oid}&OTYPE={module_otype}">
-            <div class="form">
-                <div class="item">
-                    <label for="SZUsername">Username</label>
-                    <br />
-                    <input class="cat_textbox_small" type="text" name="Username" id="SZUsername" maxlength="255" />
-                </div>
-                <div class="item">
-                    <label for="SZPassword">Password</label>
-                    <br />
-                    <input class="cat_textbox_small" type="password" name="Password" id="SZPassword" maxlength="255" autocomplete="off" />
-                </div>
-                <div class="item">
-                    <input type="checkbox" name="RememberMe" id="RememberMe" />
-                    <label for="RememberMe">Remember Me</label>
-                </div>
-                <div class="item">
-                    <input class="cat_button" type="submit" value="Log in" />&nbsp;<a href="/_System/SystemPages/PasswordRetrieveRequest">Lost password?</a>
-                </div>
+<div class="secure-login">
+    <h3>SECURE ZONE LOGIN</h3>
+    <form name="catseczoneform71939" onsubmit="return checkWholeForm71939(this)" method="post" action="/ZoneProcess.aspx?ZoneID=-1&Referrer={module_siteUrl,true,true}&OID={module_oid}&OTYPE={module_otype}">
+        <div class="form">
+            <div class="item">
+                <label for="SZUsername">Username</label>
+                <br />
+                <input class="cat_textbox_small" type="text" autocomplete="off" name="Username" id="SZUsername" maxlength="255" />
             </div>
-            <script type="text/javascript" src="/CatalystScripts/ValidationFunctions.js?vs=b167.r514791-phase1"></script>
-            <script type="text/javascript">
-                //<![CDATA[
-                function checkWholeForm86000(theForm) {
-                    var why = "";
-                    if (theForm.Username) why += isEmpty(theForm.Username.value, "Username");
-                    if (theForm.Password) why += isEmpty(theForm.Password.value, "Password");
-                    if (why != "") {
-                        alert(why);
-                        return false;
-                    }
-                    theForm.submit();
+            <div class="item">
+                <label for="SZPassword">Password</label>
+                <br />
+                <input class="cat_textbox_small" type="password" autocomplete="off" name="Password" id="SZPassword" maxlength="255" autocomplete="off" />
+            </div>
+            <div class="item">
+                <input type="checkbox" name="RememberMe" id="RememberMe" />
+                <label for="RememberMe">Remember Me</label>
+            </div>
+            <div class="item">
+                <input class="cat_button" type="submit" value="Log in" />&nbsp;<a href="/_System/SystemPages/PasswordRetrieveRequest">Lost password?</a>
+            </div>
+        </div>
+        <script type="text/javascript" src="/CatalystScripts/ValidationFunctions.js?vs=b206.r515655-phase1"></script>
+        <script type="text/javascript">
+            //<![CDATA[
+            function checkWholeForm71939(theForm) {
+                var why = "";
+                if (theForm.Username) why += isEmpty(theForm.Username.value, "Username");
+                if (theForm.Password) why += isEmpty(theForm.Password.value, "Password");
+                if (why != "") {
+                    alert(why);
                     return false;
                 }
-                //]]>
-            </script>
-        </form>
-    </div>
+                theForm.submit();
+                return false;
+            }
+            //]]>
+        </script>
+    </form>
+    <div class="item"><a href="/register">Create Account</a></div>
+</div>
     
-    
-    <div class="item"><a href="/register">Create Account</a></div>   
-</div><!-- InstanceEndEditable --></div>
+    {% if globals.user.isLoggedIn == true -%}
+        <!-- Logged IN Link -->
+    	<!-- Get the customers id and then secure zone page id --> 
+        {module_data resource="customers" subresource="securezones" resourceId="{{globals.user.entityId}}" version="v3" template="" collection="customerZones"}
+    	<h3><a class="nav-link" href="/Default.aspx?PageID={{customerZones.items[0].secureZone.landingPageId}}">{{globals.user.firstname}}'s Account</a></h3>
+    	<script>
+            $( document ).ready(function() {
+            	$(".secure-login").css("display","none");
+                window.location.replace("/Default.aspx?PageID={{customerZones.items[0].secureZone.landingPageId}}");
+            });
+    	</script>
+        {% else -%}
+    	<p>Not Logged In</p>
+        {% endif -%}
+   
+</div>
+
+
+
+
+
+
+<!-- InstanceEndEditable --></div>
         </div>
         {% include"/_System/Includes/footer.inc" %}
         <!-- Bootstrap core JavaScript

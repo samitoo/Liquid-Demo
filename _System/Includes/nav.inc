@@ -16,7 +16,7 @@
                     {% endif -%}            
         </ul>
     </div>
-    <a href="/Users/customer/ask_a_question"><button type="submit" class="btn btn-primary navbutton">Ask A Question!</button></a>
+    <a href="/login"><button type="submit" class="btn btn-primary navbutton">Ask A Question!</button></a>
 </nav>
 <!-----MAIN Nav----->
 <nav class="navbar navbar-expand-lg navbar-dark bgblue mainnav"> <a class="navbar-brand" href="/"><img alt="" src="/_assets/img/cpalogo1.png" class="headlogo"></a>

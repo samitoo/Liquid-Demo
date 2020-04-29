@@ -14,15 +14,14 @@
             </div>
             <div class="col-sm-8">
                 <!-- InstanceBeginEditable name="ContentArea" --><h2>Ask a Question!</h2>
-<p>
-    Anim pariatur cliche reprehenderit, enim eiusmod. Anim pariatur cliche reprehenderit, enim eiusmod.Anim pariatur cliche reprehenderit, enim eiusmod.Anim pariatur cliche reprehenderit, enim eiusmod.
-</p>
+
 <div>
     <div id="submissionForm">
-        <form name="catcustomcontentform71190" onsubmit="return checkWholeForm71190(this)" enctype="multipart/form-data" method="post" action="/CustomContentProcess.aspx?CCID=26435&OID={module_oid}&OTYPE={module_otype}">
+            <form name="catcustomcontentform71190" id="catcustomcontentform71190" onsubmit="return checkWholeForm71190(this)" enctype="multipart/form-data" method="post" action="/CustomContentProcess.aspx?CCID=26435&OID={module_oid}&OTYPE={module_otype}" >
             <table class="webform" cellspacing="0" cellpadding="2" border="0">
                 <tr class="hide">
                     <td>
+                        <!--- Set Zip Code as category from stored extended CRM --> 
                         <input type="hidden" name="CAT_Category" id="CAT_Category" value="{module_customerfield,594052,812514}" />
                     </td>
                 </tr>
@@ -60,12 +59,31 @@
                         <br />
                         <select name="CAT_Custom_4" id="CAT_Custom_4" class="cat_dropdown">
                             <option value=" ">-- Please select --</option>
-                            {module_webapps render="collection" id="26466" filter="all" sortType="ALPHABETICAL" collection="CPAList" template=""} 
+                            <!--Grab Zip code from stored extended CRM-->
+                            {% capture zip %}{module_customerfield,594052,812514}{% endcapture %}
+                            <!--Go through all categories and find the value, then grab the parent ID --> 
+                            {module_categorylist  id="-1" maxLevel="2" collection="regionList" template=""}
+                            {% for item in regionList.items -%}
+                                {% if item.id == zip %}
+                            		{% assign parentId = item.parentId %}
+                                {% endif %}
+                            {% endfor -%}
+                            <!--Generate list of all CPAs in the Parent ID-->
+                            {module_webapps render="collection" id="26466" filter="classified" itemId="{{parentId}}" sortType="ALPHABETICAL" collection="CPAList" template=""} 
                             {% for item in CPAList.items -%}
                             <option value="{{item.itemid}}">{{item.name}}</option>
                             {% endfor -%}
-                            <option value="0000">Random CPA</option>
+                            <option value="0000">Pick Your CPA at Random</option>
                         </select>
+                    	<script>
+                            /*Dictionary for sending alert email*/
+                        	var dict = [];
+                            {% for item in CPAList.items -%}
+                            dict[{{item.itemid}}]="{{item.['Email Address']}}";
+                            {% endfor -%}
+                            
+                        </script>
+                        	 
                     </td>
                 </tr>
                 <tr>
@@ -73,8 +91,12 @@
                     <input type="hidden" name="CAT_Custom_5" id="CAT_Custom_5" value="Submitted">
                 </tr>
                 <tr>
+                    <!--Set userID on questions to filter -->
+                    <input type="hidden"  name="CAT_Custom_7" id="CAT_Custom_7" value="{{globals.user.entityId}}" />
+       			</tr>
+                <tr>
                     <td>
-                        <input class="cat_button" type="submit" value="Submit" id="catcustomcontentbutton" />
+                        <input class="cat_button" type="submit" value="Ask Question!" id="catcustomcontentbutton"/>
                     </td>
                 </tr>
             </table>
@@ -84,21 +106,23 @@
                 var submitcount71190 = 0;
                 
                 function checkWholeForm71190(theForm) {
+                    
                     var why = "";
                     if (theForm.ItemName) why += isEmpty(theForm.ItemName.value, "Item Name");
                     if (theForm.CAT_Custom_2) why += isEmpty(theForm.CAT_Custom_2.value, "Question");
+                    if (theForm.CAT_Custom_4) why += checkDropdown(theForm.CAT_Custom_4.value, "Preferred CPA");
                     if (why != "") {
                         alert(why);
                         return false;
                     }
                     if (submitcount71190 == 0) {
-                        submitcount71190++;
-                        theForm.submit();
-                        return false;
+                    submitcount71190++;
+                        sendEmailAndSubmit();
+                    	return false;
                     } else {
-                        alert("Form submission is in progress.");
-                        return false;
+                        console.log("Form submission is in progress.");
                     }
+                     
                 }
                 //]]>
             </script>
@@ -107,12 +131,11 @@
         {module_webapps render="item" id="26466" filter="all" resultsPerPage="100" rowCount="1" }
         
     </div>
+    
     <script>
         /*--- TOGGLE SELECTED CPA DATA --- */
         $('#CAT_Custom_4').change(function() {
-            
-            
-            
+
              $('.preferredCPA').hide();
             var selectedCPA = $(this).val();
             
@@ -134,44 +157,58 @@
             
         });
         
-        /*--- Select a random CPA instead of from a list --*/
-        /*$('#randomSelectButton').click(function(){*/
-        $('#regions').change(function() {
+
+        /*--Email the CPA, Submit form on success --*/
+        function sendEmailAndSubmit(){
             
-            var options = $('#CAT_Custom_4').find('option');
-            var item = options[Math.floor(Math.random()*options.length)];
+            console.log('clicked');
+            
+            $(".toggleLoaderblock").toggle();
+            var cpaEmail = $('#CAT_Custom_4 option:selected').val();
+            
+            var template_params = {
+                "cpa_email": dict[cpaEmail],
+                "to_name": $('#CAT_Custom_4 :selected').text(),
+                "question_name": $('#ItemName').val()
+            }
+            
+            var service_id = "default_service";
+            var template_id = "alert_cpa";
+            emailjs.send(service_id,template_id,template_params)
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                $("form#catcustomcontentform71190").submit();
+            }, function(error) {
+                console.log('FAILED...', error);
+                $(".toggleLoaderblock").toggle();
+                var alertBox = alert("Update Failed.\n Please Try again.");
+            });
+   		};
+
         
-            $("#CAT_Custom_4").val(item.value);
-            $('.preferredCPA').hide();
-            var selectedCPA = item.value;
-            $('#' + selectedCPA).show();
-        });
-                
-        
-        /* --------Toggle Subcategories based on Top Category ---------- */
-        $('#regions').change(function() {
-            
-            var selectedCPACategory = $(this).val();
-            console.log(selectedCPACategory);
-            
-            /* Need to check parent id -- */
-            $("#CAT_Category option").each(function(i){
-                
-                var parentId = $(this).attr('id');
-                if(parentId == selectedCPACategory){
-                    $(this).show();
-                }
-                else{
-                   $(this).hide();
-                }
-       		 });
-            
-        });
     </script>
-</div><!-- InstanceEndEditable -->
+    
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- InstanceEndEditable -->
             </div>
         </div>
         </div>
+         {% include"/_System/Includes/loadingIcon.inc" %}
          {% include"/_System/Includes/footer.inc" %}
         <!-- Bootstrap core JavaScript
 ================================================== -->

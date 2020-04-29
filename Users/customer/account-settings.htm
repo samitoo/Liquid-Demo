@@ -14,9 +14,7 @@
             </div>
             <div class="col-sm-8">
                 <!-- InstanceBeginEditable name="ContentArea" --><h2>Account Settings</h2>
-<p>
-    Anim pariatur cliche reprehenderit, enim eiusmod.
-</p>
+
 <div id="privateInfo">
 <form name="catupdatedetailsformform47321" method="post" enctype="multipart/form-data" onsubmit="return checkWholeForm47321(this)" action="/MemberProcess.aspx">
         <p>&bull; Required</p>
@@ -436,28 +434,16 @@
             }
             //]]>
             
-            /* --------Toggle Subcategories based on Top Category ---------- */
-        $('#regions').change(function() {
-            
-            var selectedCPACategory = $(this).val();
-            console.log(selectedCPACategory);
-            
-            /* Need to check parent id -- */
-            $("#CAT_Custom_812514_594052 option").each(function(i){
-                
-                var parentId = $(this).attr('id');
-                if(parentId == selectedCPACategory){
-                    $(this).show();
-                }
-                else{
-                   $(this).hide();
-                }
-       		 });
-            
-        });
+        
         </script>
+    {% include"/_System/Includes/toggleSubcat.inc" %}
     </form>
 </div>
+
+
+
+
+
 
 
 
@@ -469,6 +455,7 @@
             </div>
         </div>
         </div>
+         {% include"/_System/Includes/loadingIcon.inc" %}
          {% include"/_System/Includes/footer.inc" %}
         <!-- Bootstrap core JavaScript
 ================================================== -->

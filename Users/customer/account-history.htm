@@ -20,13 +20,16 @@
 
 {module_webappscustomer id="26435" filter="all" collection="questions" template=""} 
 {% for item in questions.items %} 
-    {% if item.status == 'Closed' -%} 
-    	<a href="{{item.url}}">{{item.name}}</a><br>
-    {% endif -%} 
+	{% if item.['Submitted Customer ID'] == {{globals.user.entityId}} -%}
+        {% if item.status == 'Closed' -%} 
+                <a href="{{item.url}}">{{item.name}}</a><br>
+        {% endif -%} 
+	{% endif -%} 
 {%endfor%}<!-- InstanceEndEditable -->
             </div>
         </div>
         </div>
+         {% include"/_System/Includes/loadingIcon.inc" %}
          {% include"/_System/Includes/footer.inc" %}
         <!-- Bootstrap core JavaScript
 ================================================== -->

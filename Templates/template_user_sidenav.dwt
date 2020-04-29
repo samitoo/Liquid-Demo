@@ -17,6 +17,7 @@
             </div>
         </div>
         </div>
+         {% include"/_System/Includes/loadingIcon.inc" %}
          {% include"/_System/Includes/footer.inc" %}
         <!-- Bootstrap core JavaScript
 ================================================== -->

@@ -532,7 +532,7 @@
     <div class="item"><label>Name on Card</label><br />
     <input class="cat_textbox" id="CardName" autocomplete="off" type="text" name="CardName" /> • </div>
     <div class="item"><label>Card Number</label><br />
-    <input class="cat_textbox" id="CardNumber" autocomplete="off" type="text" name="CardNumber" /> • </div>
+    <input class="cat_textbox" id="CardNumber" autocomplete="off" type="text" name="CardNumber" onfocusin="this.type='text'" onfocusout="this.type='password'"/> • </div>
     <div class="item"><label>Card Expiry</label><br />
     <select class="cat_dropdown_smaller" id="CardExpiryMonth" name="CardExpiryMonth">
     <option value="1" selected="true">Jan</option>
@@ -567,7 +567,7 @@
     <option value="6">JCB</option>
     </select> • </div>
     <div class="item"><label>CCV Number</label><br />
-    <input class="cat_textbox" id="CardCCV" autocomplete="off" type="text" name="CardCCV" /> • </div>
+    <input class="cat_textbox" id="CardCCV" autocomplete="off type="text" name="CardCCV" onfocusin="this.type='text'" onfocusout="this.type='password'"/> • </div>
     </div>
     <!-- paymentdiv -->
     <div class="item"><label>Amount</label><br />

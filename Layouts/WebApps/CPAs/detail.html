@@ -1,8 +1,17 @@
-<table>
-  <tr>
-    <td>{tag_name}</td>
-  </tr>
-  <tr>
-    <td>{tag_description}</td>
-  </tr>
-</table>
+<div id="public info" style="width: 60%; margin: 0 auto;">
+    <div class="col-sm-12">
+        <div class="cpaprofilename">{tag_name} <span class="profileedit">{module_goback text="Back"}</span>
+        </div>
+        <div class="profilewrapper">
+            <div class="preferredCPA" id="{tag_itemid}">
+                <div class="cpaprofilepic"> <img src="{tag_profile pic_value}">
+                    <p class="cpaprofileinfo">{tag_description}</p>
+                </div>
+            </div>
+        </div>
+        <div class="cpaprofilelicense">License Number: {tag_license number}
+        </div>
+        <div class="cpaprofilelicense">Region: {tag_classifications}
+        </div>
+    </div>
+</div>

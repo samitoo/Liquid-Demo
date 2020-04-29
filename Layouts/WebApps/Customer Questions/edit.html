@@ -2,15 +2,30 @@
     
     <!--Launch the CPA app, find their one entry, should only have 1, and get their CPA ID from it -->
     {module_webappscustomer id="26466", filter="all", collection="idEntry" template=""} 
-    {% for item in idEntry.items %} {% assign CPAID = item.itemID %}
-    <p>CPA ID: </p><pre>{{CPAID | json }}</pre> 
+    {% for item in idEntry.items %} 
+    	{% assign CPAID = item.itemID %}
     {%endfor%}
+    
+    <!--Make sure they are the assigned CPA to view the item--> 
+    {% if CPAID == {tag_preferred cpa} -%}
     
     <!-- Get question app collection for current ID to check for related files -->
     {module_webapps id="26435" filter="item" itemid="{tag_itemid}" collection="question" template=""} 
     
+    <!-- Access Customer info, match ID's and store the email -->
+    {% assign customerID = {{question.items[0].['Submitted Customer ID']}} %}
+    {module_data resource="customers" version="v3" fields="id,email1,firstName" skip="0" order="id" where="\{'id':'{{customerID}}'\}" collection="myCustomerData"}
+
+    {% for item in myCustomerData.items %} 
+        {% if item.id == customerID %}
+    		{% assign customerEmail = item.email1.value %}
+    		{% assign customerName = item.firstName %}
+        {% endif %}
+    {%endfor%}
     
-    <form name="catcustomcontentform23092" onsubmit="return checkWholeForm23092(this)" enctype="multipart/form-data" method="post" action="/CustomContentProcess.aspx?A=EditSave&CCID=26435&amp;OID={module_oid}&amp;OTYPE={module_otype}">
+    
+    
+    <form name="catcustomcontentform23092" id="catcustomcontentform23092" onsubmit="return checkWholeForm23092(this)" enctype="multipart/form-data" method="post" action="/CustomContentProcess.aspx?A=EditSave&CCID=26435&amp;OID={module_oid}&amp;OTYPE={module_otype}">
 <div class="table-responsive">        
 <table class="webform table" cellspacing="0" cellpadding="2" border="0">
             <tbody>
@@ -18,14 +33,14 @@
                     <td>
                         <label for="ItemName">Item Name</label>
                         <br />
-                        <input class="cat_textbox_small" type="text" name="ItemName" id="ItemName" maxlength="255" /> &bull;</td>
+                        <input class="cat_textbox_small" type="text" name="ItemName" id="ItemName" readonly/> &bull;</td>
                 </tr>
                 <tr>
                     <td>
                         <label for="CAT_Custom_2">Question <span class="req">*</span>
                         </label>
                         <br />
-                        <textarea name="CAT_Custom_2" id="CAT_Custom_2" cols="10" rows="4" class="cat_listbox" onkeydown="if(this.value.length&gt;=4000)this.value=this.value.substring(0,3999);"></textarea>
+                        <textarea name="CAT_Custom_2" id="CAT_Custom_2" cols="10" rows="4" class="cat_listbox" readonly></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -50,6 +65,13 @@
                 </tr>
                 <tr>
                     <td>
+                        <label for="CAT_Custom_6">Answer</label>
+                        <br />
+                        <textarea name="CAT_Custom_6" id="CAT_Custom_6" cols="10" rows="4" class="cat_listbox" onkeydown="if(this.value.length>=4000)this.value=this.value.substring(0,3999);"></textarea>
+                    </td>
+                 </tr>
+                <tr>
+                    <td>
                         <label for="CAT_Custom_5">Status</label>
                         <br />
                         <select name="CAT_Custom_5" id="CAT_Custom_5" class="cat_dropdown">
@@ -61,8 +83,12 @@
                     </td>
                 </tr>
                 <tr>
+                    <!--Set userID on questions to filter -->
+                    <input type="hidden"  name="CAT_Custom_7" id="CAT_Custom_7" value="{tag_submitted customer id}" />
+       			</tr>
+                <tr>
                     <td>
-                        <input class="cat_button" type="submit" value="Submit" id="catcustomcontentbutton" />
+                        <input class="cat_button" type="submit" value="Answer Question" id="catcustomcontentbutton" />
                     </td>
                 </tr>
                 <tr>
@@ -80,22 +106,56 @@
                 var why = "";
                 if (theForm.ItemName) why += isEmpty(theForm.ItemName.value, "Item Name");
                 if (theForm.CAT_Custom_2) why += isEmpty(theForm.CAT_Custom_2.value, "Question");
+                if (theForm.CAT_Custom_2) why += isEmpty(theForm.CAT_Custom_6.value, "Answer");
                 if (why != "") {
                     alert(why);
                     return false;
                 }
                 if (submitcount23092 == 0) {
                     submitcount23092++;
-                    theForm.submit();
+                    sendEmailAndSubmit();
                     return false;
                 } else {
-                    alert("Form submission is in progress.");
-                    return false;
+                    console.log("Form submission is in progress.");
                 }
             }
             //]]>
+            
+            
+            /*--Email the Customer, Submit form on success --*/
+        function sendEmailAndSubmit(){
+            
+            console.log('clicked');
+        	$(".toggleLoaderblock").toggle();
+           
+            
+            var template_params = {
+                "customer_email": '{{customerEmail}}',
+                "to_name": '{{customerName}}'
+            }
+            
+            var service_id = "default_service";
+            var template_id = "alert_customer";
+            emailjs.send(service_id,template_id,template_params)
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                console.log('submitting');
+                $("form#catcustomcontentform23092").submit();
+            }, function(error) {
+                console.log('FAILED...', error);
+                $(".toggleLoaderblock").toggle();
+                var alertBox = alert("Update Failed.\n Please Try again.");
+            });
+
+   		};
+            
+            
         </script>
     </form>
+    <!--Not the assigned CPA-->
+    {% else %}
+    	<p>Page Not Found</p>
+    {% endif -%}
 </div>
 
 

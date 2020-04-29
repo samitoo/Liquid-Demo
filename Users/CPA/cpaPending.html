@@ -23,8 +23,6 @@
         {module_webappscustomer id="26466", filter="all", collection="idEntry" template=""}
         {% for item in idEntry.items %}
         {% assign CPAID = item.itemID %}
-        <p>CPA ID: </p>
-        <pre>{{CPAID | json }}</pre>
         {%endfor%}
         
         <h2>ASSIGNED PENDING QUESTIONS</h2>

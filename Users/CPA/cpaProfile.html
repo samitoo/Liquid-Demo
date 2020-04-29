@@ -19,13 +19,11 @@
                 <!-- InstanceBeginEditable name="ContentArea" -->
         <div id="public info">
             <h2>Edit Public Info</h2>
-            <!--Uses backup template-->
-            <!--{module_webappscustomer,26466,a,,,,true,10,false,1} -->
             
             {module_webappscustomer id="26466" filter="all" collection="cpaProfile" template=""}
             {% for item in cpaProfile.items -%}
             <div class="col-sm-12">
-                <div class="cpaprofilename">{{{item.name}} <span class="profileedit"><a href="{{item.editUrl}}">Edit</a></span>
+                <div class="cpaprofilename">{{item.name}} <span class="profileedit"><a href="{{item.editUrl}}">Edit</a></span>
                 </div>
                 <div class="profilewrapper">
                     <div class="preferredCPA" id="{{item.itemid}}">
@@ -36,9 +34,28 @@
                 </div>
                 <div class="cpaprofilelicense">License Number: {{item.['license number']}}
                 </div>
+                <div class="cpaprofilelicense">Region: {{this.classifications}}
+                    
+                    <!-- Search for their Category because BC sucks ass -->
+                    {module_categorylist  id="-1" maxLevel="1" collection="regionList" template=""}
+                    <!-- Loop through all top level categories --> 
+                    {% for item in regionList.items -%}
+                    	{% assign categoryID = {{item.id}} %}
+                    	{% assign categoryName = {{item.name}} %}
+                    	<!-- Filter CPA app entries per top level category -->
+                        {module_webapps id="26466" filter="classified" itemid='{{categoryID}}' collection="region" template=""}
+                        {% for item in region.items -%}
+                    		<!-- If an Item in that category matches the CPAs ID, output the current Categories Name-->
+                            {% if item.id == cpaProfile.items[0].id %}
+                    			{{categoryName}}
+                    			{% break %}
+                            {% endif %}
+                        {% endfor -%}
+                    {% endfor -%}
+                    
+                </div>
             </div>
 			{% endfor -%}
-            
         </div>
     <!-- InstanceEndEditable -->
             </div>

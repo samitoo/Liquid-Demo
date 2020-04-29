@@ -1,0 +1,210 @@
+<html><!-- InstanceBegin template="/Templates/template_user_sidenav.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" --><title></title><!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" --><!-- InstanceEndEditable -->
+
+    
+</head>
+<body>
+        {% include"/_System/Includes/head.inc" %} {% include"/_System/Includes/nav.inc" %}
+        
+<div class="container mt-5">
+        <div class="row">
+            <div class="col-sm-4 sidenav">
+                {% include"/_System/Includes/user_sidenav.inc" %}
+            </div>
+            <div class="col-sm-8">
+                <!-- InstanceBeginEditable name="ContentArea" --><h2>Ask a Question!</h2>
+<div>
+<div id="submissionForm">
+<form name="catcustomcontentform71190" id="catcustomcontentform71190" onsubmit="return checkWholeForm71190(this)" enctype="multipart/form-data" method="post" action="/CustomContentProcess.aspx?CCID=26435&amp;OID={module_oid}&amp;OTYPE={module_otype}">
+    <table class="webform" cellspacing="0" cellpadding="2" border="0">
+        <tbody>
+            <tr class="hide">
+                <td>
+                <!--- Set Zip Code as category from stored extended CRM -->
+                <input type="hidden" name="CAT_Category" id="CAT_Category" value="{module_customerfield,594052,812514}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <label for="ItemName">Subject</label>
+                <br />
+                <input class="cat_textbox_small" type="text" name="ItemName" id="ItemName" maxlength="255" /> &bull;</td>
+            </tr>
+            <tr>
+                <td>
+                <label for="CAT_Custom_2">Question <span class="req">*</span>
+                </label>
+                <br />
+                <textarea name="CAT_Custom_2" id="CAT_Custom_2" cols="10" rows="4" class="cat_listbox" onkeydown="if(this.value.length&gt;=4000)this.value=this.value.substring(0,3999);"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <label for="CAT_Custom_3">Related File (100 MB limit)</label>
+                <br />
+                <input type="file" name="CAT_Custom_3" id="CAT_Custom_3" class="cat_textbox" />
+                </td>
+            </tr>
+            <tr class="hide">
+                <td>
+                <input type="hidden" name="CAT_Custom_1" id="CAT_Custom_1" value="{module_username}" />
+                </td>
+            </tr>
+            <tr>
+                <!-- Liquid List-->
+                <td>
+                <label for="CAT_Custom_4">Preferred CPA</label>
+                <br />
+                <select name="CAT_Custom_4" id="CAT_Custom_4" class="cat_dropdown">
+                <option value=" ">-- Please select --</option>
+                <!--Grab Zip code from stored extended CRM-->
+                {% capture zip %}{module_customerfield,594052,812514}{% endcapture %}
+                <!--Go through all categories and find the value, then grab the parent ID -->
+                {module_categorylist  id="-1" maxLevel="2" collection="regionList" template=""}
+                {% for item in regionList.items -%}
+                {% if item.id == zip %}
+                {% assign parentId = item.parentId %}
+                {% endif %}
+                {% endfor -%}
+                <!--Generate list of all CPAs in the Parent ID-->
+                {module_webapps render="collection" id="26466" filter="classified" itemId="{{parentId}}" sortType="ALPHABETICAL" collection="CPAList" template=""}
+                {% for item in CPAList.items -%}
+                <option value="{{item.itemid}}">{{item.name}}</option>
+                {% endfor -%}
+                <option value="0000">Pick Your CPA at Random</option>
+                </select>
+                <script>
+                            /*Dictionary for sending alert email*/
+                        	var dict = [];
+                            {% for item in CPAList.items -%}
+                            dict[{{item.itemid}}]="{{item.['Email Address']}}";
+                            {% endfor -%}
+                            
+                        </script>
+                </td>
+            </tr>
+            <tr>
+                <!-- Sets default value as submitted -->
+                <input type="hidden" name="CAT_Custom_5" id="CAT_Custom_5" value="Submitted" />
+            </tr>
+            <tr>
+                <!--Set userID on questions to filter -->
+                <input type="hidden" name="CAT_Custom_7" id="CAT_Custom_7" value="{{globals.user.entityId}}" />
+            </tr>
+            <tr>
+                <td>
+                <input class="cat_button" type="submit" value="Ask Question!" id="catcustomcontentbutton" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <script type="text/javascript" src="/CatalystScripts/ValidationFunctions.js?vs=b147.r514197-phase1"></script>
+    <script type="text/javascript">
+                //<![CDATA[
+                var submitcount71190 = 0;
+                
+                function checkWholeForm71190(theForm) {
+                    
+                    var why = "";
+                    if (theForm.ItemName) why += isEmpty(theForm.ItemName.value, "Item Name");
+                    if (theForm.CAT_Custom_2) why += isEmpty(theForm.CAT_Custom_2.value, "Question");
+                    if (theForm.CAT_Custom_4) why += checkDropdown(theForm.CAT_Custom_4.value, "Preferred CPA");
+                    if (why != "") {
+                        alert(why);
+                        return false;
+                    }
+                    if (submitcount71190 == 0) {
+                    submitcount71190++;
+                        sendEmailAndSubmit();
+                    	return false;
+                    } else {
+                        console.log("Form submission is in progress.");
+                    }
+                     
+                }
+                //]]>
+            </script>
+</form>
+<!-- Output All CPAs-->
+{module_webapps render="item" id="26466" filter="all" resultsPerPage="100" rowCount="1" }
+</div>
+<script>
+        /*--- TOGGLE SELECTED CPA DATA --- */
+        $('#CAT_Custom_4').change(function() {
+
+             $('.preferredCPA').hide();
+            var selectedCPA = $(this).val();
+            
+            /*select random CPA*/
+            if(selectedCPA == 0000){
+                console.log("random");
+                var options = $('#CAT_Custom_4').find('option');
+                var item = options[Math.floor(Math.random()*options.length)];
+            
+                $("#CAT_Custom_4").val(item.value);
+                $('.preferredCPA').hide();
+                var selectedCPA = item.value;
+                $('#' + selectedCPA).show();
+            }
+            /*choose selected cpa*/
+            else{
+            	$('#' + selectedCPA).show();
+            }
+            
+        });
+        
+
+        /*--Email the CPA, Submit form on success --*/
+        function sendEmailAndSubmit(){
+            
+            console.log('clicked');
+            
+            $(".toggleLoaderblock").toggle();
+            var cpaEmail = $('#CAT_Custom_4 option:selected').val();
+            
+            var template_params = {
+                "cpa_email": dict[cpaEmail],
+                "to_name": $('#CAT_Custom_4 :selected').text(),
+                "question_name": $('#ItemName').val()
+            }
+            
+            var service_id = "default_service";
+            var template_id = "alert_cpa";
+            emailjs.send(service_id,template_id,template_params)
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                $("form#catcustomcontentform71190").submit();
+            }, function(error) {
+                console.log('FAILED...', error);
+                $(".toggleLoaderblock").toggle();
+                var alertBox = alert("Update Failed.\n Please Try again.");
+            });
+   		};
+
+        
+    </script>
+</div>
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="J8HA57BCD9G2G">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+<!-- InstanceEndEditable -->
+            </div>
+        </div>
+        </div>
+         {% include"/_System/Includes/loadingIcon.inc" %}
+         {% include"/_System/Includes/footer.inc" %}
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+        </script>
+    
+</body>
+<!-- InstanceEnd --></html>

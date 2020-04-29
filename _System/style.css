@@ -724,6 +724,7 @@ p.cpaprofileinfo {
     padding: 10px;
     color: white;
     text-shadow: 1px 1px 1px #477015;
+    border-top: 1px solid white;
 }
 
 span.profileedit {
@@ -860,6 +861,49 @@ h5.card-title.card-head span {
 .preferredCPA img{
     width:200px;
 }
+/*Create a spinning load icon*/
+    .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        position:fixed;
+        top:50%;
+        left:50%;
+        -webkit-animation: spin 2s linear infinite;
+        /* Safari */
+        animation: spin 2s linear infinite;
+    }
+    /* Safari */
+    
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    
+    /*Dims the screen while loading*/
+    .loadBlocker{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: gray;
+        opacity: .7;
+    }
 
 @media screen and (max-width: 992px) {
     
@@ -881,6 +925,11 @@ h5.card-title.card-head span {
     .bgrowwhite {
         background-color: #fcfcfc;
         padding: 50px 10px 50px;
+    }
+    
+    .bgrowwhite img{
+        float:none !important;
+        width:100% !important;
     }
     
     .mainbanner .col-md-8{
@@ -1012,6 +1061,10 @@ h5.card-title.card-head span {
         border-bottom: none;
     }
     
+    div#privateInfo form tr {
+        float: none;
+	}	
+    
     
     
 }
@@ -1033,8 +1086,9 @@ div#privateInfo form td .cat_button {
     transition-property: transform;
 }
 div#privateInfo form td .cat_button:hover, div#privateInfo form td .cat_button:focus, div#privateInfo form td .cat_button:active {
-    -webkit-transform: scale(11.1);
-    transform: scale(11.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    cursor:pointer;
     
 }
 

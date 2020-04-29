@@ -17,25 +17,51 @@
 <p>
 </p>
 
-{module_webappscustomer id="26435" filter="all" collection="questions" template=""} 
-{% for item in questions.items %} 
 
-{% if item.status == 'Submitted' or item.status == 'Answered' -%}
-<div class="appcardwrap">
-    <div class="card col-sm-12 col-md-6">
-        <div class="card-body">
-            <h5 class="card-title card-head">Status: {{item.status}}<span>#{{item.itemid}}</span></h5>
-            <div class="cardpad">
-                <h5 class="card-title">Title: {{item.name}}</h5>
-                <h5 class="card-title">Date: {{item.lastUpdateDate | date: 'ddd, MMM dd, yyyy'}}</h5>
-                <h5 class="card-title">CPA: {{item.['Preferred CPA']}}</h5>
-                <p class="card-text"><a href="{{item.Url}}" class="card-link"><button>Open</button></a></p>
+
+<!-- If setting customer type resets the zip, prompt user to set it --> 
+{module_customerfield,594052,812514, collection="customerZipDB" template=""}
+{% assign customerZip = customerZipDB.value %}
+{% if customerZip == "" or customerZip == "temp" -%}
+	<p><a href="/Users/customer/account-settings">Please update your Zip Code</a></p>
+{% endif -%} 
+
+<!--Load Customers Questions-->
+{module_webapps id="26435" filter="all" collection="questions" template=""} 
+<!--Webapp write permssions require manual filtering to avoid seeing others questions -->
+{% assign foo = 0 -%}
+
+{% for item in questions.items %} 
+	<!--only grab clients tickets --> 
+	{% if item.['Submitted Customer ID'] == {{globals.user.entityId}} -%}
+		<!-- only show non closed tickets --> 
+		{% assign foo = foo | plus: 1 %}
+        {% if item.status == 'Submitted' or item.status == 'Answered' -%}
+        <div class="appcardwrap">
+            <div class="card col-sm-12 col-md-6">
+                <div class="card-body">
+                    <h5 class="card-title card-head">Status: {{item.status}}<span>#{{item.itemid}}</span></h5>
+                    <div class="cardpad">
+                        <h5 class="card-title">Title: {{item.name}}</h5>
+                        <h5 class="card-title">Date: {{item.lastUpdateDate | date: 'ddd, MMM dd, yyyy'}}</h5>
+                        <h5 class="card-title">CPA: {{item.['Preferred CPA']}}</h5>
+                        <p class="card-text"><a href="{{item.Url}}" class="card-link"><button>Open</button></a></p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-{% endif -%} 
+        {% endif -%} 
+	{% endif -%} 
 {%endfor%}
+
+<!--Prompt the user to ask a question if none found-->
+{% if foo == 0 -%}
+	<h3>No Open Questions, why not <a href="/Users/customer/ask_a_question">ask one?</a></h3>
+{% endif -%} 
+
+
+
+
 
 
 
@@ -43,6 +69,7 @@
             </div>
         </div>
         </div>
+         {% include"/_System/Includes/loadingIcon.inc" %}
          {% include"/_System/Includes/footer.inc" %}
         <!-- Bootstrap core JavaScript
 ================================================== -->
